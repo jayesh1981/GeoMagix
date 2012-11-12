@@ -7,6 +7,7 @@ $('#employeeListPage').bind('pageinit', function(event) {
 });
 
 function getEmployeeList() {
+	alert("1.0");
 	$.getJSON(serviceURL + 'getemployees.php', function(data) {
 		$('#employeeList li').remove();
 		employees = data.items;
