@@ -1,4 +1,4 @@
-var serviceURL = "http://localhost/directory/services/";
+var serviceURL = "http://dir.comuv.com/services/";
 
 var employees;
 
