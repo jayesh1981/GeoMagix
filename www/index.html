@@ -27,7 +27,33 @@
 		(function(window, $, PhotoSwipe){
 			
 			$(document).ready(function(){
-				
+				$.ajax({
+  url: makeURL("/photos?fields=images"),
+  dataType: "json",
+  success: function(data) {
+  	//console.log("Sample of data:", data.data[0].images[0].source);
+	console.log("Sample of data:", data.data.length);
+	var string = "";
+	for(var i=0; i<data.data.length; i++)
+	{
+		//string+="<img src='"+data.data[i].images[0].source+"'/>";
+		var src = data.data[i].images[0].source;
+			string+="<li><a href='"+src+"' rel='external'><img src='"+src+"' /></a></li>";
+	}
+	$("#g1").html(string);
+    //alert(data);
+	//$("#cover").attr("src",data.cover.source);
+	//$("div#first>div>h1").html(data.name);
+  }
+});
+function makeURL(action)
+{
+var AT = "AAACEdEose0cBAGemugbW7a1OwKxBND7s8JOZCOIuaO1ZAG92NoFxwuJq0MCZA1dRPzxHUJ3gqXnXvuRU6UkujnkiyZCQhDfRWGKkfRkx5Lghsdg4Tocf";
+var url = "https://graph.facebook.com/";
+var fbid = "coca-cola";
+return url+fbid+action+"&access_token="+AT;
+}
+
 				$('div.gallery-page')
 					.live('pageshow', function(e){
 						
@@ -100,18 +126,8 @@
 
 	<div data-role="content">	
 		
-		<ul class="gallery">
-		
-			<li><a href="http://neteye.github.com/demo/images/1.jpg" rel="external"><img src="http://neteye.github.com/demo/thumbs/1.jpg" alt="Image 001" /></a></li>
-			<li><a href="images/full/002.jpg" rel="external"><img src="images/thumb/002.jpg" alt="Image 002" /></a></li>
-			<li><a href="images/full/003.jpg" rel="external"><img src="images/thumb/003.jpg" alt="Image 003" /></a></li>
-			<li><a href="images/full/004.jpg" rel="external"><img src="images/thumb/004.jpg" alt="Image 004" /></a></li>
-			<li><a href="images/full/005.jpg" rel="external"><img src="images/thumb/005.jpg" alt="Image 005" /></a></li>
-			<li><a href="images/full/006.jpg" rel="external"><img src="images/thumb/006.jpg" alt="Image 006" /></a></li>
-			<li><a href="images/full/007.jpg" rel="external"><img src="images/thumb/007.jpg" alt="Image 007" /></a></li>
-			<li><a href="images/full/008.jpg" rel="external"><img src="images/thumb/008.jpg" alt="Image 008" /></a></li>
-			<li><a href="images/full/009.jpg" rel="external"><img src="images/thumb/009.jpg" alt="Image 009" /></a></li>
-			
+		<ul id="g1" class="gallery">
+					
 		</ul>
 		
 	</div>

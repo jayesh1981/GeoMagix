@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>jQuery Mobile Tutorial on Codeforest.net</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+    <script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+<script type="text/javascript">
+	
+	$.ajax({
+  url: makeURL("/photos?fields=images"),
+  dataType: "json",
+  success: function(data) {
+  	//console.log("Sample of data:", data.data[0].images[0].source);
+	console.log("Sample of data:", data.data.length);
+	var string = "";
+	for(var i=0; i<data.data.length; i++)
+	{
+		string+="<img src='"+data.data[i].images[0].source+"'/>";
+	}
+	$("#text").html(string);
+    //alert(data);
+	//$("#cover").attr("src",data.cover.source);
+	//$("div#first>div>h1").html(data.name);
+  }
+});
+function makeURL(action)
+{
+var AT = "AAACEdEose0cBAGemugbW7a1OwKxBND7s8JOZCOIuaO1ZAG92NoFxwuJq0MCZA1dRPzxHUJ3gqXnXvuRU6UkujnkiyZCQhDfRWGKkfRkx5Lghsdg4Tocf";
+var url = "https://graph.facebook.com/";
+var fbid = "coca-cola";
+return url+fbid+action+"&access_token="+AT;
+}
+
+  </script>
+	</head>
+ 
+<body>
+<!-- Start of first page -->
+<div data-role="page" id="first">
+ 
+    <div data-role="header">
+        <h1>First</h1>
+    </div><!-- /header -->
+	
+ 
+    <div data-role="content">   
+        <p>The content</p> 
+	<img id="cover"/>
+	<div id="text"></div>
+	<ul data-role="listview">
+		<li><a href="acura.html">Acura</a></li>
+		<li><a href="audi.html">Audi</a></li>
+		<li><a href="bmw.html">BMW</a></li>
+	</ul>		
+        <p>View internal page called <a href="#second">second</a></p>   
+    </div><!-- /content -->
+ 
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+ 
+ 
+<!-- Start of second page -->
+<div data-role="page" id="second">
+ 
+    <div data-role="header">
+        <h1>Second</h1>
+    </div><!-- /header -->
+ 
+    <div data-role="content">   
+        <p>I'm the second content</p>       
+        <p><a href="#first">Back to first</a></p>   
+    </div><!-- /content -->
+ 
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
